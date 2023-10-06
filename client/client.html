@@ -5,10 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        window.onload = () => {
+            const submit = document.querySelector("#start-button");
+            const page = document.querySelector("#page");
+            let options;
+
+            const sendData = (url, options) => fetch(url, options);
+
+
+            submit.onclick = () => {
+                options = {
+                    method: "GET",
+                    headers: {'accept': 'application/json'},
+                }
+
+                let returned = sendData('/randomPage', options);
+
+                returned.then((response) => {
+                    console.log(response);
+                    return response.json();
+                }).then((data) => {
+                    console.log(data);
+                    page.src = data.content_urls.desktop.page;
+                })
+            }
+
+        }
+    </script>
 </head>
 
 <body>
-    <iframe src="https://en.wikipedia.org/wiki/Z_(joke_line)" title="WikiRace" style="width: 80%;height: 90vh;">
+    <input type="submit" value="Start" id="start-button" />
+    <iframe src="" title="WikiRace" id="page" style="width: 80%;height: 90vh;">
     </iframe>
 </body>
 

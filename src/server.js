@@ -1,6 +1,7 @@
 const http = require('http');
 // const url = require('url');
 const htmlHandler = require('./htmlResponses');
+const wikiHandler = require('./wikiLoader');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
@@ -9,6 +10,9 @@ const onRequest = (request, response) => {
 
   if (request.url === '/') {
     htmlHandler.getIndex(request, response);
+  }
+  if (request.url === '/randomPage') {
+    wikiHandler.getRandomPage(request, response);
   }
 };
 
