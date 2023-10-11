@@ -74,18 +74,31 @@ const getRandomPage = async (request, response) => {
     });
 
   // Get potential pathways using the titles of each page
-  await getShortestPath(savedData.data1.title, savedData.data2.title);
+  await getShortestPath(savedData.data1.title, savedData.data2.title).catch(() => {
+    // One of the random pages was created since the wikipedia database was last published
+    // Start this group of methods all over again. This happens like 1 / 8 times
+    console.log('#################################################################');
+    console.log('Crisis averted! Article was created after the database');
+    console.log('#################################################################');
 
-  response.writeHead(200, { 'Content-Type': request.headers.accept });
-
-  // Only pass starting page so it is loaded into the iframe
-  const returnData = JSON.stringify({
-    data: savedData.data1,
-    state,
+    return getRandomPage(request, response);
   });
 
-  response.write(returnData);
-  response.end();
+  // This error check is only in cas getShortestPath failed initially
+  if (!response.finished) {
+    response.writeHead(200, { 'Content-Type': request.headers.accept });
+
+    // Only pass starting page so it is loaded into the iframe
+    const returnData = JSON.stringify({
+      data: savedData.data1,
+      state,
+    });
+
+    response.write(returnData);
+    response.end();
+    return response;
+  }
+
   return response;
 };
 
