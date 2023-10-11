@@ -14,6 +14,9 @@ const onRequest = (request, response) => {
   if (request.url === '/randomPage') {
     wikiHandler.getRandomPage(request, response);
   }
+  if (request.url === '/style.css') {
+    htmlHandler.getCSS(request, response);
+  }
 };
 
 http.createServer(onRequest).listen(port, () => {

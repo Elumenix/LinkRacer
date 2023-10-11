@@ -5,14 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <script>
         window.onload = () => {
             const submit = document.querySelector("#start-button");
             const page = document.querySelector("#page");
             const goalField = document.querySelector("#goal");
             const pathField = document.querySelector("#pathways");
+            const loadingIcon = document.querySelector(".loader");
             let options;
             let paths;
+
+            loadingIcon.hidden = true;
 
             const sendData = (url, options) => fetch(url, options);
 
@@ -29,6 +33,8 @@
             }
 
             submit.onclick = () => {
+                loadingIcon.hidden = false;
+
                 options = {
                     method: "GET",
                     headers: { 'accept': 'application/json' },
@@ -44,6 +50,8 @@
                     page.src = data.data.content_urls.desktop.page;
                     paths = data.state.paths;
 
+                    loadingIcon.hidden = true;
+
                     goalField.innerHTML = `Goal: ${paths[0][paths[0].length - 1].title}`;
                     pathField.innerHTML = pathBuilder(paths[0]);
                 })
@@ -54,7 +62,10 @@
 
 <body>
     <input type="submit" value="Start" id="start-button" />
-    <iframe src="" title="WikiRace" id="page" style="width: 80%;height: 90vh;">
+    <div id="mainWindow">
+        <div class="loader"></div>
+        <iframe src="" title="WikiRace" id="page" style="width: 80%;height: 90vh;">
+    </div>
     </iframe>
     <div id="result-window">
         <div id="goal"></div>

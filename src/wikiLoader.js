@@ -33,6 +33,10 @@ const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reje
 
     // pathsDenormalized is an array of paths instead of pageIds
     // Importantly, this lets me get the title and url of each page to give to the user
+
+    console.log(startingPage);
+    console.log(endingPage);
+
     const pathsDenormalized = paths.map((path) => path.map((pageId) => pages[pageId]));
 
     state.paths = pathsDenormalized;
@@ -57,7 +61,7 @@ const getRandomPage = async (request, response) => {
   // Get two random wikipedia pages
   await Promise.all([
     fetch('https://en.wikipedia.org/api/rest_v1/page/random/summary'),
-    fetch('https://en.wikipedia.org/api/rest_v1/page/random/summary')
+    fetch('https://en.wikipedia.org/api/rest_v1/page/random/summary'),
   ])
     .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
     .then(([data1, data2]) => {
