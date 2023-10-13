@@ -19,10 +19,6 @@
             loadingIcon.hidden = true;
 
 
-            // Define the API endpoint
-            const url = "https://en.wikipedia.org/w/api.php";
-
-
             const sendData = (url, options) => fetch(url, options);
 
             // This function iterates through every pathway in a list to show
@@ -53,50 +49,28 @@
                 }).then((data) => {
                     console.log(data);
 
-
-                    // Define the parameters for the API request
-                    const params = {
-                        action: "query",
-                        prop: "revisions",
-                        titles: data.data.title,
-                        rvlimit: "1",
-                        rvprop: "ids|timestamp",
-                        rvdir: "older",  // List newest revisions first
-                        rvend: "2001-01-15T00:00:00Z",  // Start listing from this timestamp
-                        rvstart: "2021-01-01T00:00:00Z",  // End listing at this timestamp
-                        format: "json",
-                        formatversion: "2",
-                        origin: "*"
+                    options = {
+                        method: "GET",
+                        headers: { 'accept': 'application/json'}
                     };
 
 
-                    // Convert the parameters to a URL-encoded string
-                    const queryString = new URLSearchParams(params).toString();
+                    // Make sure the first page loaded is the revised version of it's source
+                    let revisionFetch = sendData(`/getRevised?title=${data.data.title}`, options);
 
-                    // Fetch the data from the API
-                    fetch(`${url}?${queryString}`)
-                        .then((response) => {
-                            return response.json();
-                        })
-                        .then((revisionData) => {
-                            // Extract the page ID (it's a key in the 'pages' object)
-                            const pageId = Object.keys(revisionData.query.pages)[0];
-
-                            // Extract the revisions
-                            const revisions = revisionData.query.pages[pageId].revisions;
-
-                            let fullUrl = `${data.data.content_urls.desktop.page}?oldid=${revisions[0].revid}`;
-
-                            page.src = fullUrl;
-
-                            loadingIcon.hidden = true;
-                        })
-                        .catch(error => console.error(`Error: ${error}`));
+                    revisionFetch.then((response) => {
+                        return response.json();
+                    }).then((updatedData) => {
+                        console.log(updatedData);
+                        let fullUrl = `${data.data.content_urls.desktop.page}?${updatedData.urlExtension}`
+                        console.log(fullUrl);
+                        page.src = fullUrl;
+                        loadingIcon.hidden = true;
+                    });
 
 
+                    // Fields that don't need an additional fetch request to load
                     paths = data.state.paths;
-
-
                     goalField.innerHTML = `Goal: ${paths[0][paths[0].length - 1].title}`;
                     pathField.innerHTML = pathBuilder(paths[0]);
                 });

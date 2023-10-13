@@ -1,21 +1,25 @@
 const http = require('http');
-// const url = require('url');
+const url = require('url');
 const htmlHandler = require('./htmlResponses');
 const wikiHandler = require('./wikiLoader');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const onRequest = (request, response) => {
-  console.log(request.url);
+  const {pathname, query} = url.parse(request.url);
+  console.log(pathname);
 
-  if (request.url === '/') {
+  if (pathname === '/') {
     htmlHandler.getIndex(request, response);
   }
-  if (request.url === '/randomPage') {
+  if (pathname === '/randomPage') {
     wikiHandler.getRandomPage(request, response);
   }
-  if (request.url === '/style.css') {
+  if (pathname === '/style.css') {
     htmlHandler.getCSS(request, response);
+  }
+  if (pathname === '/getRevised') {
+    wikiHandler.getRevisedUrl(request, response, query);
   }
 };
 
