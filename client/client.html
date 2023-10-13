@@ -19,6 +19,30 @@
             loadingIcon.hidden = true;
 
 
+            // This will confirm that the correct page is retrieved for the iframe
+            page.onload = () => {
+                let url = page.document.referrer;
+                let parts = url.split('/');
+                let titleWithId = parts[parts.length - 1];
+                let titleParts = titleWithId.split('?');
+                let title = titleParts[0];
+
+                let revisionFetch = sendData(`/getRevised?title=${title}`, options);
+
+                revisionFetch.then((response) => {
+                    return response.json();
+                }).then((updatedData) => {
+                    console.log(updatedData);
+                    let fullUrl = `${url.split('?')[0]}?${updatedData.urlExtension}`
+                    console.log(fullUrl);
+
+                    if (page.src !== fullUrl) {
+                        page.src = fullUrl;
+                    }
+                });
+            }
+
+
             const sendData = (url, options) => fetch(url, options);
 
             // This function iterates through every pathway in a list to show
@@ -51,7 +75,7 @@
 
                     options = {
                         method: "GET",
-                        headers: { 'accept': 'application/json'}
+                        headers: { 'accept': 'application/json' }
                     };
 
 
@@ -83,7 +107,7 @@
     <input type="submit" value="Start" id="start-button" />
     <div id="mainWindow">
         <div class="loader"></div>
-        <iframe src="" title="WikiRace" id="page" style="width: 80%;height: 90vh;">
+        <embed type="text/html" src="" title="WikiRace" id="page" style="width: 80%;height: 90vh;">
     </div>
     </iframe>
     <div id="result-window">

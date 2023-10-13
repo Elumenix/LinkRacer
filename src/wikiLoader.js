@@ -59,7 +59,6 @@ const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reje
 
 const getRevisedUrl = (request, response, query) => {
   const urlParams = queryString.parse(query);
-  console.log(urlParams);
 
   const params = {
     action: "query",
