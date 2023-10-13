@@ -19,43 +19,8 @@
             loadingIcon.hidden = true;
 
 
-         // Define the API endpoint
-const url = "https://en.wikipedia.org/w/api.php";
-
-// Define the parameters for the API request
-const params = {
-    action: "query",
-    prop: "revisions",
-    titles: "Stack Overflow",
-    rvlimit: "500",
-    rvprop: "ids|timestamp",
-    rvdir: "newer",
-    rvstart: "2001-02-20T00:00:00Z",
-    rvend: "2021-02-20T00:00:00Z",
-    format: "json",
-    formatversion: "2",
-    origin: "*"
-};
-
-// Convert the parameters to a URL-encoded string
-const queryString = new URLSearchParams(params).toString();
-
-// Fetch the data from the API
-fetch(`${url}?${queryString}`)
-    .then(response => response.json())
-    .then(data => {
-        // Extract the page ID (it's a key in the 'pages' object)
-        const pageId = Object.keys(data.query.pages)[0];
-
-        // Extract the revisions
-        const revisions = data.query.pages[pageId].revisions;
-
-        // Print the timestamp and oldid of each revision
-        revisions.forEach(rev => {
-            console.log(`Timestamp: ${rev.timestamp}, OldID: ${rev.revid}`);
-        });
-    })
-    .catch(error => console.error(`Error: ${error}`));
+            // Define the API endpoint
+            const url = "https://en.wikipedia.org/w/api.php";
 
 
             const sendData = (url, options) => fetch(url, options);
@@ -89,12 +54,53 @@ fetch(`${url}?${queryString}`)
                     console.log(data);
                     //page.src = data.data.content_urls.desktop.page;
 
-                    fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=${data.ata.title}&rvlimit=1&rvprop=content&rvdir=newer&rvstart=2001-02-20T00:00:00Z&rvend=2021-02-20T00:00:00Z&format=json`).then((urlResponse) => {
-                        return urlResponse.json();
-                    }).then((urlData) => {
 
-                        loadingIcon.hidden = true;
-                    });
+                    // Define the parameters for the API request
+                    const params = {
+                        action: "query",
+                        prop: "revisions",
+                        titles: "Stack Overflow",
+                        rvlimit: "1",
+                        rvprop: "ids|timestamp",
+                        rvdir: "older",  // List newest revisions first
+                        rvend: "2001-01-15T00:00:00Z",  // Start listing from this timestamp
+                        rvstart: "2021-01-01T00:00:00Z",  // End listing at this timestamp
+                        format: "json",
+                        formatversion: "2",
+                        origin: "*"
+                    };
+
+
+                    // Convert the parameters to a URL-encoded string
+                    const queryString = new URLSearchParams(params).toString();
+
+                    // Fetch the data from the API
+                    fetch(`${url}?${queryString}`)
+                        .then((response) => {
+                            console.log(response);
+                            return response.json();
+                        })
+                        .then((revisionData) => {
+                            console.log(revisionData);
+
+                            // Extract the page ID (it's a key in the 'pages' object)
+                            const pageId = Object.keys(revisionData.query.pages)[0];
+
+                            // Extract the revisions
+                            const revisions = revisionData.query.pages[pageId].revisions;
+
+                            console.log(revisions);
+
+
+                            let fullUrl = `${data.data.content_urls.desktop.page}&${revisions.pageid}`;
+                            console.log(fullUrl);
+
+                            page.src = fullUrl;
+
+                            loadingIcon.hidden = true;
+                        })
+                        .catch(error => console.error(`Error: ${error}`));
+
 
                     paths = data.state.paths;
 
