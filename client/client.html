@@ -18,6 +18,46 @@
 
             loadingIcon.hidden = true;
 
+
+         // Define the API endpoint
+const url = "https://en.wikipedia.org/w/api.php";
+
+// Define the parameters for the API request
+const params = {
+    action: "query",
+    prop: "revisions",
+    titles: "Stack Overflow",
+    rvlimit: "500",
+    rvprop: "ids|timestamp",
+    rvdir: "newer",
+    rvstart: "2001-02-20T00:00:00Z",
+    rvend: "2021-02-20T00:00:00Z",
+    format: "json",
+    formatversion: "2",
+    origin: "*"
+};
+
+// Convert the parameters to a URL-encoded string
+const queryString = new URLSearchParams(params).toString();
+
+// Fetch the data from the API
+fetch(`${url}?${queryString}`)
+    .then(response => response.json())
+    .then(data => {
+        // Extract the page ID (it's a key in the 'pages' object)
+        const pageId = Object.keys(data.query.pages)[0];
+
+        // Extract the revisions
+        const revisions = data.query.pages[pageId].revisions;
+
+        // Print the timestamp and oldid of each revision
+        revisions.forEach(rev => {
+            console.log(`Timestamp: ${rev.timestamp}, OldID: ${rev.revid}`);
+        });
+    })
+    .catch(error => console.error(`Error: ${error}`));
+
+
             const sendData = (url, options) => fetch(url, options);
 
             // This function iterates through every pathway in a list to show
@@ -47,14 +87,21 @@
                     return response.json();
                 }).then((data) => {
                     console.log(data);
-                    page.src = data.data.content_urls.desktop.page;
+                    //page.src = data.data.content_urls.desktop.page;
+
+                    fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=${data.ata.title}&rvlimit=1&rvprop=content&rvdir=newer&rvstart=2001-02-20T00:00:00Z&rvend=2021-02-20T00:00:00Z&format=json`).then((urlResponse) => {
+                        return urlResponse.json();
+                    }).then((urlData) => {
+
+                        loadingIcon.hidden = true;
+                    });
+
                     paths = data.state.paths;
 
-                    loadingIcon.hidden = true;
 
                     goalField.innerHTML = `Goal: ${paths[0][paths[0].length - 1].title}`;
                     pathField.innerHTML = pathBuilder(paths[0]);
-                })
+                });
             }
         }
     </script>
