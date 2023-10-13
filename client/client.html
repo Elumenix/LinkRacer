@@ -52,14 +52,13 @@
                     return response.json();
                 }).then((data) => {
                     console.log(data);
-                    //page.src = data.data.content_urls.desktop.page;
 
 
                     // Define the parameters for the API request
                     const params = {
                         action: "query",
                         prop: "revisions",
-                        titles: "Stack Overflow",
+                        titles: data.data.title,
                         rvlimit: "1",
                         rvprop: "ids|timestamp",
                         rvdir: "older",  // List newest revisions first
@@ -77,23 +76,16 @@
                     // Fetch the data from the API
                     fetch(`${url}?${queryString}`)
                         .then((response) => {
-                            console.log(response);
                             return response.json();
                         })
                         .then((revisionData) => {
-                            console.log(revisionData);
-
                             // Extract the page ID (it's a key in the 'pages' object)
                             const pageId = Object.keys(revisionData.query.pages)[0];
 
                             // Extract the revisions
                             const revisions = revisionData.query.pages[pageId].revisions;
 
-                            console.log(revisions);
-
-
-                            let fullUrl = `${data.data.content_urls.desktop.page}&${revisions.pageid}`;
-                            console.log(fullUrl);
+                            let fullUrl = `${data.data.content_urls.desktop.page}?oldid=${revisions[0].revid}`;
 
                             page.src = fullUrl;
 
