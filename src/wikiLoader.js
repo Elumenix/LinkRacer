@@ -33,12 +33,13 @@ const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reje
       // isTargetRedirected,
     } = data;
 
-    // pathsDenormalized is an array of paths instead of pageIds
-    // Importantly, this lets me get the title and url of each page to give to the user
-
     console.log(startingPage);
     console.log(endingPage);
 
+    // pathsDenormalized is an array of paths instead of pageIds
+    // Importantly, this lets me get the title and url of each page to give to the user
+    // If the page in question was first created after January 1, 2021, then it won't be in the database
+    // which would cause this assignment to crash the program, which I've handled in the catch block of getrandompage
     const pathsDenormalized = paths.map((path) => path.map((pageId) => pages[pageId]));
 
     state.paths = pathsDenormalized;

@@ -15,6 +15,7 @@
             const loadingIcon = document.querySelector(".loader");
             let options;
             let paths;
+            let popup;
 
             loadingIcon.hidden = true;
 
@@ -44,6 +45,13 @@
 
 
             const sendData = (url, options) => fetch(url, options);
+
+            // Remove any popup when mouse leaves any link
+            document.addEventListener('mouseout', function (event) {
+                if (document.body.contains(popup)) {
+                    document.body.removeChild(popup);
+                }
+            });
 
             // This function iterates through every pathway in a list to show
             // a potential route a user could have taken to get to the goal
@@ -94,36 +102,59 @@
                         var links = document.getElementsByTagName('a');
 
                         // Add a mouseover event listener to each link
-                        for (var i = 0; i < links.length; i++) {
+                        for (let i = 0; i < links.length; i++) {
                             links[i].addEventListener('mouseover', function (event) {
                                 // Prevent the link from being followed
                                 event.preventDefault();
 
                                 // Get the search term from the link's href
                                 var searchTerm = this.href.split('/').pop();
-                                console.log(searchTerm);
 
-                                // Fetch the summary from the Wikipedia API
-                                fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + searchTerm)
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        // Create a new div element for the popup
-                                        var popup = document.createElement('div');
-                                        popup.textContent = data.extract;
+                                // Go to the article itself rather than a specific part of it
+                                // otherwise I can't fetch it and this will send an error
+                                if (searchTerm.includes('#')) {
+                                    searchTerm = searchTerm.split("#")[0];
+                                }
 
-                                        // Position the popup at the mouse's location
-                                        popup.style.position = 'absolute';
-                                        popup.style.left = event.pageX + 'px';
-                                        popup.style.top = event.pageY + 'px';
+                                if (searchTerm.includes('?')) {
+                                    searchTerm = searchTerm.split("?")[0];
+                                }
 
-                                        // Add the popup to the body
-                                        document.body.appendChild(popup);
+                                if (this.href.includes('/wiki/')) {
+                                    // Fetch the summary from the Wikipedia API
+                                    fetch(`https://en.wikipedia.org/w/api.php?action=parse&section=0&prop=text&page=${searchTerm}&format=json&origin=*&redirects`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            // Create a new div element for the popup
+                                            console.log(data);
 
-                                        // Remove the popup after a delay
-                                        setTimeout(function () {
-                                            document.body.removeChild(popup);
-                                        }, 1000);
-                                    });
+                                            // There should only be one on screen at a time
+                                            if (document.body.contains(popup)) {
+                                                document.body.removeChild(popup);
+                                            }
+
+                                            popup = document.createElement('div');
+                                            popup.innerHTML = data.parse.text["*"];
+
+                                            // Position the popup at the mouse's location, apply style guidelines
+                                            popup.style.position = 'absolute';
+                                            popup.style.left = (event.pageX + 10) + 'px';
+                                            popup.style.top = event.pageY + 'px';
+                                            popup.style.display = "block";
+                                            popup.classList.add("mwe-popups");
+                                            popup.classList.add("mwe-popups-type-page");
+                                            popup.classList.add("mwe-popups-fade-in-down");
+                                            popup.classList.add("flipped-x-y");
+                                            popup.classList.add("mwe-popups-no-image-pointer");
+                                            popup.classList.add("mwe-popups-is-not-tall");
+
+
+                                            // Add the popup to the body
+                                            document.body.appendChild(popup);
+                                        }).catch((error) => {
+                                            console.log("This website also uses wiki, but it's not wikipedia");
+                                        });
+                                }
                             });
                         }
 
