@@ -7,7 +7,6 @@ const state = {
   error: null,
 };
 
-
 const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reject) => {
   // Test route
   state.sourcePageTitle = startingPage;
@@ -62,21 +61,20 @@ const getRevisedUrl = async (request, response, query) => {
   const urlParams = queryString.parse(query);
 
   const params = {
-    action: "query",
-    prop: "revisions",
+    action: 'query',
+    prop: 'revisions',
     titles: urlParams.title,
-    rvlimit: "1",
-    rvprop: "ids|timestamp",
-    rvdir: "older",
-    rvend: "2001-01-15T00:00:00Z",
-    rvstart: "2021-01-01T00:00:00Z",
-    format: "json",
-    formatversion: "2",
-    origin: "*"
-  }
+    rvlimit: '1',
+    rvprop: 'ids|timestamp',
+    rvdir: 'older',
+    rvend: '2001-01-15T00:00:00Z',
+    rvstart: '2021-01-01T00:00:00Z',
+    format: 'json',
+    formatversion: '2',
+    origin: '*',
+  };
 
   const searchString = new URLSearchParams(params).toString();
-
 
   let extensionUrl;
 
@@ -94,24 +92,19 @@ const getRevisedUrl = async (request, response, query) => {
     })
     .catch((error) => console.error(`Error: ${error}`));
 
-
-  fetch(`https://en.wikipedia.org/w/api.php?action=parse&format=json&${extensionUrl}&prop=text|headhtml|displaytitle`).then((wikiResponse) => {
-    return wikiResponse.json();
-  }).then((wikiHtml) => {
-    console.log(wikiHtml);
-
+  fetch(`https://en.wikipedia.org/w/api.php?action=parse&format=json&${extensionUrl}&prop=text|headhtml|displaytitle`).then((wikiResponse) => wikiResponse.json()).then((wikiHtml) => {
     const returnData = JSON.stringify({
       title: wikiHtml.parse.title,
       titlehtml: wikiHtml.parse.displaytitle,
       headhtml: wikiHtml.parse.headhtml,
-      html: wikiHtml.parse.text
+      html: wikiHtml.parse.text,
     });
 
     // Return the data
     response.writeHead(200, { 'Content-Type': request.headers.accept });
     response.write(returnData);
     response.end();
-  })
+  });
 };
 
 const getRandomPage = async (request, response) => {

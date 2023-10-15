@@ -6,7 +6,7 @@ const wikiHandler = require('./wikiLoader');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const onRequest = (request, response) => {
-  const {pathname, query} = url.parse(request.url);
+  const { pathname, query } = url.parse(request.url);
   console.log(pathname);
 
   if (pathname === '/') {

@@ -86,8 +86,47 @@
                         return response.json();
                     }).then((updatedData) => {
                         console.log(updatedData);
-                        
-                        page.innerHTML =`<html><head>${updatedData.headhtml["*"]}</head>${updatedData.html["*"]}</html>`;
+
+                        page.innerHTML = `${updatedData.titlehtml}<hr><hr>${updatedData.html["*"]}`;
+
+
+                        // Get all the links in your document
+                        var links = document.getElementsByTagName('a');
+
+                        // Add a mouseover event listener to each link
+                        for (var i = 0; i < links.length; i++) {
+                            links[i].addEventListener('mouseover', function (event) {
+                                // Prevent the link from being followed
+                                event.preventDefault();
+
+                                // Get the search term from the link's href
+                                var searchTerm = this.href.split('/').pop();
+                                console.log(searchTerm);
+
+                                // Fetch the summary from the Wikipedia API
+                                fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + searchTerm)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // Create a new div element for the popup
+                                        var popup = document.createElement('div');
+                                        popup.textContent = data.extract;
+
+                                        // Position the popup at the mouse's location
+                                        popup.style.position = 'absolute';
+                                        popup.style.left = event.pageX + 'px';
+                                        popup.style.top = event.pageY + 'px';
+
+                                        // Add the popup to the body
+                                        document.body.appendChild(popup);
+
+                                        // Remove the popup after a delay
+                                        setTimeout(function () {
+                                            document.body.removeChild(popup);
+                                        }, 1000);
+                                    });
+                            });
+                        }
+
 
                         loadingIcon.hidden = true;
                     });
