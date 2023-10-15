@@ -19,3 +19,326 @@
         transform: rotate(360deg);
     }
 }
+
+
+/*Everything below here was mainly adapted from wikipedias style guidelines, found here: https://en.wikipedia.org/wiki/MediaWiki:Common.css*/
+#page cite,
+#page dfn {
+    font-style: inherit;
+}
+
+#page q {
+    quotes: '"' '"' "'" "'";
+}
+
+#page blockquote {
+    overflow: hidden;
+    margin: 1em 0;
+    padding: 0 40px;
+}
+
+#page small {
+    font-size: 85%;
+}
+
+#page .mw-body-content sub,
+#page .mw-body-content sup {
+    font-size: 80%;
+}
+
+#page .ns-talk .mw-body-content dd {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+}
+
+#page .client-js .collapsible:not(.mw-made-collapsible).collapsed>tbody>tr:not(:first-child),
+#page .client-js .outercollapse .innercollapse.mw-collapsible:not(.mw-made-collapsible)>p,
+#page .client-js .outercollapse .innercollapse.mw-collapsible:not(.mw-made-collapsible)>table,
+#page .client-js .outercollapse .innercollapse.mw-collapsible:not(.mw-made-collapsible)>thead+tbody,
+#page .client-js .outercollapse .innercollapse.mw-collapsible:not(.mw-made-collapsible) tr:not(:first-child),
+#page .client-js .outercollapse .innercollapse.mw-collapsible:not(.mw-made-collapsible) .mw-collapsible-content,
+#page #editpage-specialchars {
+    display: none;
+}
+
+#page ol.references {
+    font-size: 90%;
+    margin-bottom: 0.5em;
+}
+
+#page span[rel="mw:referencedBy"] {
+    counter-reset: mw-ref-linkback 0;
+}
+
+#page span[rel="mw:referencedBy"]>a::before {
+    content: counter(mw-ref-linkback, lower-alpha);
+    font-size: 80%;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#page a[rel="mw:referencedBy"]::before {
+    font-weight: bold;
+    content: "^";
+}
+
+#page span[rel="mw:referencedBy"]::before {
+    content: "^ ";
+}
+
+#page .mw-ref>a[data-mw-group=lower-alpha]::after {
+    content: "[" counter(mw-Ref, lower-alpha) "]";
+}
+
+#page .mw-ref>a[data-mw-group=upper-alpha]::after {
+    content: "[" counter(mw-Ref, upper-alpha) "]";
+}
+
+#page .mw-ref>a[data-mw-group=decimal]::after {
+    content: "[" counter(mw-Ref, decimal) "]";
+}
+
+#page .mw-ref>a[data-mw-group=lower-roman]::after {
+    content: "[" counter(mw-Ref, lower-roman) "]";
+}
+
+#page .mw-ref>a[data-mw-group=upper-roman]::after {
+    content: "[" counter(mw-Ref, upper-roman) "]";
+}
+
+#page .mw-ref>a[data-mw-group=lower-greek]::after {
+    content: "[" counter(mw-Ref, lower-greek) "]";
+}
+
+#page .mw-parser-output .mw-collapsible-toggle:not(.mw-ui-button) {
+    font-weight: normal;
+    padding-right: 0.2em;
+    padding-left: 0.2em;
+}
+
+#page .mw-collapsible-leftside-toggle .mw-collapsible-toggle {
+    /* @noflip */
+    float: left;
+}
+
+#page .wikitable td ul,
+#page .wikitable td ol,
+#page .wikitable td dl {
+    /* @noflip */
+    text-align: left;
+}
+
+#page .mw-parser-output a[href$=".pdf"].external,
+#page .mw-parser-output a[href*=".pdf?"].external,
+#page .mw-parser-output a[href*=".pdf#"].external,
+#page .mw-parser-output a[href$=".PDF"].external,
+#page .mw-parser-output a[href*=".PDF?"].external,
+#page .mw-parser-output a[href*=".PDF#"].external {
+    background: url("//upload.wikimedia.org/wikipedia/commons/4/4d/Icon_pdf_file.png") no-repeat right;
+    /* @noflip */
+    padding: 8px 18px 8px 0;
+}
+
+#page .mw-warning-with-logexcerpt.mw-warning-with-logexcerpt.mw-warning-with-logexcerpt,
+#page div.mw-lag-warn-high,
+#page div.mw-cascadeprotectedwarning,
+#page div#mw-protect-cascadeon {
+    clear: both;
+    margin: 0.2em 0;
+    border: 1px solid #bb7070;
+    background-color: #ffdbdb;
+    padding: 0.25em 0.9em;
+    box-sizing: border-box;
+}
+
+#page .mw-contributions-blocked-notice-partial .mw-warning-with-logexcerpt.mw-warning-with-logexcerpt {
+    border-color: #fc3;
+    background-color: #fef6e7;
+}
+
+#page figure[typeof~="mw:File/Thumb"],
+#page figure[typeof~="mw:File/Frame"],
+#page .thumbinner {
+    min-width: 100px;
+}
+
+#page #mw-subcategories,
+#page #mw-pages,
+#page #mw-category-media,
+#page #filehistory,
+#page #wikiPreview,
+#page #wikiDiff {
+    clear: both;
+}
+
+#page .mw-tag-markers {
+    font-style: italic;
+    font-size: 90%;
+}
+
+#page .checkuser-show,
+#page .sysop-show,
+#page .abusefilter-show,
+#page .abusefilter-helper-show,
+#page .patroller-show,
+#page .templateeditor-show,
+#page .extendedmover-show,
+#page .extendedconfirmed-show,
+#page .autoconfirmed-show,
+#page .user-show {
+    display: none;
+}
+
+#page .ve-ui-mwNoticesPopupTool-item .editnotice-redlink,
+#page .ve-ui-mwNoticesPopupTool-item .mbox-image,
+#page .ve-ui-mwNoticesPopupTool-item .mbox-imageright {
+    display: none !important;
+}
+
+#page ul.permissions-errors {
+    margin: 0;
+}
+
+#page ul.permissions-errors>li {
+    list-style: none;
+}
+
+#page span.mwe-math-mathml-inline {
+    font-size: 118%;
+}
+
+#page .mwe-math-fallback-image-display,
+#page .mwe-math-mathml-display {
+    margin-left: 1.6em !important;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+}
+
+#page .mwe-math-mathml-display math {
+    display: inline;
+}
+
+@media screen {
+    #page body:not(.ns-0):not(.ns-2):not(.ns-100) .gallerybox .thumb img {
+        background: #fff url(//upload.wikimedia.org/wikipedia/commons/5/5d/Checker-16x16.png) repeat;
+    }
+
+    #page #siteSub {
+        display: block;
+    }
+}
+
+#page .flaggedrevs_draft_synced,
+#page .flaggedrevs_stable_synced,
+#page #t-upload,
+#page .mw-special-Book #coll-downloadbox {
+    display: none;
+}
+
+#page .infobox {
+    border: 1px solid #a2a9b1;
+    border-spacing: 3px;
+    background-color: #f8f9fa;
+    color: black;
+    /* @noflip */
+    margin: 0.5em 0 0.5em 1em;
+    padding: 0.2em;
+    /* @noflip */
+    float: right;
+    /* @noflip */
+    clear: right;
+    font-size: 88%;
+    line-height: 1.5em;
+    width: 22em;
+}
+
+#page .infobox-header,
+#page .infobox-label,
+#page .infobox-above,
+#page .infobox-full-data,
+#page .infobox-data,
+#page .infobox-below,
+#page .infobox-subheader,
+#page .infobox-image,
+#page .infobox-navbar,
+#page .infobox th,
+#page .infobox td {
+    vertical-align: top;
+}
+
+#page .infobox-label,
+#page .infobox-data,
+#page .infobox th,
+#page .infobox td {
+    /* @noflip */
+    text-align: left;
+}
+
+#page .infobox .infobox-above,
+#page .infobox .infobox-title,
+#page .infobox caption {
+    font-size: 125%;
+    font-weight: bold;
+    text-align: center;
+}
+
+#page .infobox-title,
+#page .infobox caption {
+    padding: 0.2em;
+}
+
+#page .infobox .infobox-header,
+#page .infobox .infobox-subheader,
+#page .infobox .infobox-image,
+#page .infobox .infobox-full-data,
+#page .infobox .infobox-below {
+    text-align: center;
+}
+
+#page .infobox .infobox-navbar {
+    /* @noflip */
+    text-align: right;
+}
+
+#page .wikitable.plainrowheaders th[scope=row],
+#page .wikitable.plainrowheaders th[scope=rowgroup] {
+    font-weight: normal;
+    /* @noflip */
+    text-align: left;
+}
+
+#page .nounderlines a,
+#page .IPA a:link,
+#page .IPA a:visited {
+    text-decoration: none !important;
+}
+
+#page .nowrap,
+#page .nowraplinks a {
+    white-space: nowrap;
+}
+
+#page .wrap,
+#page .wraplinks a {
+    white-space: normal;
+}
+
+#page span.texhtml {
+    font-family: "Nimbus Roman No9 L", "Times New Roman", Times, serif;
+    font-size: 118%;
+    line-height: 1;
+    white-space: nowrap;
+    /* Force tabular and lining display for texhtml */
+    font-variant-numeric: lining-nums tabular-nums;
+    font-kerning: none;
+}
+
+#page span.texhtml span.texhtml {
+    font-size: 100%;
+}
+
+@media screen {
+    #page .nochecker .gallerybox .thumb img {
+        background-image: none;
+    }
+}

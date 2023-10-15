@@ -20,7 +20,7 @@
 
 
             // This will confirm that the correct page is retrieved for the iframe
-            page.onload = () => {
+            /*page.onload = () => {
                 let url = page.document.referrer;
                 let parts = url.split('/');
                 let titleWithId = parts[parts.length - 1];
@@ -40,7 +40,7 @@
                         page.src = fullUrl;
                     }
                 });
-            }
+            }*/
 
 
             const sendData = (url, options) => fetch(url, options);
@@ -86,9 +86,9 @@
                         return response.json();
                     }).then((updatedData) => {
                         console.log(updatedData);
-                        let fullUrl = `${data.data.content_urls.desktop.page}?${updatedData.urlExtension}`
-                        console.log(fullUrl);
-                        page.src = fullUrl;
+                        
+                        page.innerHTML =`<html><head>${updatedData.headhtml["*"]}</head>${updatedData.html["*"]}</html>`;
+
                         loadingIcon.hidden = true;
                     });
 
@@ -107,7 +107,7 @@
     <input type="submit" value="Start" id="start-button" />
     <div id="mainWindow">
         <div class="loader"></div>
-        <embed type="text/html" src="" title="WikiRace" id="page" style="width: 80%;height: 90vh;">
+        <div id="page" style="width: 80%;height: 90vh;"></div>
     </div>
     </iframe>
     <div id="result-window">

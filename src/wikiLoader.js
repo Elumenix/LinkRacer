@@ -7,6 +7,7 @@ const state = {
   error: null,
 };
 
+
 const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reject) => {
   // Test route
   state.sourcePageTitle = startingPage;
@@ -57,7 +58,7 @@ const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reje
   });
 });
 
-const getRevisedUrl = (request, response, query) => {
+const getRevisedUrl = async (request, response, query) => {
   const urlParams = queryString.parse(query);
 
   const params = {
@@ -76,8 +77,11 @@ const getRevisedUrl = (request, response, query) => {
 
   const searchString = new URLSearchParams(params).toString();
 
+
+  let extensionUrl;
+
   // Fetch the data from the API
-  fetch(`https://en.wikipedia.org/w/api.php?${searchString}`)
+  await fetch(`https://en.wikipedia.org/w/api.php?${searchString}`)
     .then((confirmation) => confirmation.json())
     .then((data) => {
       // Extract the page ID (it's a key in the 'pages' object)
@@ -86,18 +90,28 @@ const getRevisedUrl = (request, response, query) => {
       // Extract the revisions
       const { revisions } = data.query.pages[pageId];
 
-      const fullUrl = `oldid=${revisions[0].revid}`;
-
-      const returnData = JSON.stringify({
-        urlExtension: fullUrl
-      });
-
-      // Return the data
-      response.writeHead(200, { 'Content-Type': request.headers.accept });
-      response.write(returnData);
-      response.end();
+      extensionUrl = `oldid=${revisions[0].revid}`;
     })
     .catch((error) => console.error(`Error: ${error}`));
+
+
+  fetch(`https://en.wikipedia.org/w/api.php?action=parse&format=json&${extensionUrl}&prop=text|headhtml|displaytitle`).then((wikiResponse) => {
+    return wikiResponse.json();
+  }).then((wikiHtml) => {
+    console.log(wikiHtml);
+
+    const returnData = JSON.stringify({
+      title: wikiHtml.parse.title,
+      titlehtml: wikiHtml.parse.displaytitle,
+      headhtml: wikiHtml.parse.headhtml,
+      html: wikiHtml.parse.text
+    });
+
+    // Return the data
+    response.writeHead(200, { 'Content-Type': request.headers.accept });
+    response.write(returnData);
+    response.end();
+  })
 };
 
 const getRandomPage = async (request, response) => {
