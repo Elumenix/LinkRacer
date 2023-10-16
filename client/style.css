@@ -20,6 +20,10 @@
     }
 }
 
+#page {
+    background-color: #f8f9fa;
+}
+
 
 /*Everything below here was mainly adapted from wikipedias style guidelines, found here: https://en.wikipedia.org/wiki/MediaWiki:Common.css*/
 /*For other rules, I looked into the css files on various wikipedia articles to get. There's a lot and I'm not sure how much even gets used at any given time, but considering the fact I need to support literally every wikipedia page made before January 2021, I probably need all of it.*/
@@ -1517,7 +1521,7 @@
 }
 
 #page #p-lang .uls-settings-trigger {
-    background: transparent url(/w/extensions/UniversalLanguageSelector/resources/images/cog-sprite.svg?cca73) no-repeat center top;
+    background: transparent url(https://en.wikipedia.org/w/extensions/UniversalLanguageSelector/resources/images/cog-sprite.svg?cca73) no-repeat center top;
     border: 0;
     min-height: 16px;
     min-width: 16px;
@@ -1565,29 +1569,29 @@
 #page .badge-goodarticle,
 #page .badge-goodlist,
 #page .badge-recommendedarticle {
-    list-style-image: url(/w/extensions/WikimediaBadges/resources/images/badge-silver-star.png?70a8c);
+    list-style-image: url(https://en.wikipedia.org/w/extensions/WikimediaBadges/resources/images/badge-silver-star.png?70a8c);
 }
 
 #page .badge-featuredarticle,
 #page .badge-featuredportal,
 #page .badge-featuredlist {
-    list-style-image: url(/w/extensions/WikimediaBadges/resources/images/badge-golden-star.png?ed948);
+    list-style-image: url(https://en.wikipedia.org/w/extensions/WikimediaBadges/resources/images/badge-golden-star.png?ed948);
 }
 
 #page .badge-problematic {
-    list-style-image: url(/w/extensions/WikimediaBadges/resources/images/badge-problematic.png?f3177);
+    list-style-image: url(https://en.wikipedia.org/w/extensions/WikimediaBadges/resources/images/badge-problematic.png?f3177);
 }
 
 #page .badge-proofread {
-    list-style-image: url(/w/extensions/WikimediaBadges/resources/images/badge-proofread.png?e81f9);
+    list-style-image: url(https://en.wikipedia.org/w/extensions/WikimediaBadges/resources/images/badge-proofread.png?e81f9);
 }
 
 #page .badge-validated {
-    list-style-image: url(/w/extensions/WikimediaBadges/resources/images/badge-validated.png?6232c);
+    list-style-image: url(https://en.wikipedia.org/w/extensions/WikimediaBadges/resources/images/badge-validated.png?6232c);
 }
 
 #page .badge-digitaldocument {
-    list-style-image: url(/w/extensions/WikimediaBadges/resources/images/badge-digitaldocument.png?d1c50);
+    list-style-image: url(https://en.wikipedia.org/w/extensions/WikimediaBadges/resources/images/badge-digitaldocument.png?d1c50);
 }
 
 #page .client-js ol.mw-collapsible::before,
@@ -1675,7 +1679,7 @@
 
 #page .client-js .sortable:not(.jquery-tablesorter)>*>tr:first-child>th:not(.unsortable),
 #page .jquery-tablesorter th.headerSort {
-    background-image: url(/w/resources/src/jquery.tablesorter.styles/images/sort_both.svg?0e440);
+    background-image: url(https://en.wikipedia.org/w/resources/src/jquery.tablesorter.styles/images/sort_both.svg?0e440);
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center right;
@@ -1683,219 +1687,219 @@
 }
 
 #page .jquery-tablesorter th.headerSortUp {
-    background-image: url(/w/resources/src/jquery.tablesorter.styles/images/sort_up.svg?2ff5c);
+    background-image: url(https://en.wikipedia.org/w/resources/src/jquery.tablesorter.styles/images/sort_up.svg?2ff5c);
 }
 
 #page .jquery-tablesorter th.headerSortDown {
-    background-image: url(/w/resources/src/jquery.tablesorter.styles/images/sort_down.svg?4b69e);
+    background-image: url(https://en.wikipedia.org/w/resources/src/jquery.tablesorter.styles/images/sort_down.svg?4b69e);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-bell {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=bell&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=bell&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-bell-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=bell&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=bell&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-tray {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=tray&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=tray&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-tray-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=tray&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=tray&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-labFlask {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=labFlask&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=labFlask&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-labFlask-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=labFlask&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=labFlask&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-language {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=language&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=language&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-language-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=language&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=language&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-sandbox {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=sandbox&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=sandbox&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-sandbox-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=sandbox&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=sandbox&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-listBullet {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=listBullet&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=listBullet&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-listBullet-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=listBullet&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=listBullet&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-close {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=close&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=close&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-close-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=close&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=close&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-ellipsis {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=ellipsis&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=ellipsis&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-ellipsis-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=ellipsis&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=ellipsis&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-heart {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=heart&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=heart&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-heart-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=heart&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=heart&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-logIn {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=logIn&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=logIn&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-logIn-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=logIn&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=logIn&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-logOut {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=logOut&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=logOut&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-logOut-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=logOut&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=logOut&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-search {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=search&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=search&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-search-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=search&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=search&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-settings {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=settings&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=settings&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-settings-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=settings&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=settings&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-menu {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=menu&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=menu&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-menu-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=menu&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=menu&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-imageGallery {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=imageGallery&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=imageGallery&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-imageGallery-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=imageGallery&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=imageGallery&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-star {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=star&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=star&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-star-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=star&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=star&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-halfStar {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=halfStar&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=halfStar&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-halfStar-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=halfStar&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=halfStar&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-unStar {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=unStar&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=unStar&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-unStar-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=unStar&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=unStar&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-expand {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=expand&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=expand&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-expand-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=expand&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=expand&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userAdd {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userAdd&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userAdd&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userAdd-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userAdd&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userAdd&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userAvatar {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userAvatar&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userAvatar&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userAvatar-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userAvatar&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userAvatar&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userContributions {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userContributions&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userContributions&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userContributions-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userContributions&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userContributions&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userGroup {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userGroup&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userGroup&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userGroup-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userGroup&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userGroup&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userTalk {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userTalk&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userTalk&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userTalk-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userTalk&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userTalk&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userTemporary {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userTemporary&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userTemporary&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-userTemporary-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=userTemporary&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=userTemporary&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-watchlist {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=watchlist&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=watchlist&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 #page .vector-icon.mw-ui-icon-wikimedia-watchlist-progressive {
-    background-image: url(/w/load.php?modules=skins.vector.icons&image=watchlist&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
+    background-image: url(https://en.wikipedia.org/w/load.php?modules=skins.vector.icons&image=watchlist&variant=progressive&format=original&lang=en&skin=vector-2022&version=ku0qq);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2448,7 +2452,7 @@
 
     #page .vector-feature-zebra-design-disabled .vector-dropdown .vector-dropdown-label:not(.cdx-button--icon-only)::after {
         content: "";
-        background: url(/w/skins/Vector/resources/skins.vector.styles/images/arrow-down.svg?9426f) 100% 50% no-repeat;
+        background: url(https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/arrow-down.svg?9426f) 100% 50% no-repeat;
         width: 1.23076923em;
         height: 1.23076923em;
         margin-left: -1px;
@@ -3365,7 +3369,7 @@
     }
 
     #page ul {
-        list-style-image: url(/w/skins/Vector/resources/skins.vector.styles/images/bullet-icon.svg?d4515);
+        list-style-image: url(https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/bullet-icon.svg?d4515);
     }
 
     #page pre,
@@ -3511,7 +3515,7 @@
     }
 
     #page .mw-parser-output a.external {
-        background-image: url(/w/skins/Vector/resources/skins.vector.styles/images/link-external-small-ltr-progressive.svg?30a3a);
+        background-image: url(https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/link-external-small-ltr-progressive.svg?30a3a);
         background-position: center right;
         background-repeat: no-repeat;
         background-size: 0.857em;
@@ -3592,7 +3596,7 @@
     }
 
     #page .vector-page-titlebar .mw-portlet-lang .vector-dropdown-label.cdx-button--action-progressive.cdx-button--weight-quiet::after {
-        background-image: url(/w/skins/Vector/resources/skins.vector.styles/images/arrow-down-progressive.svg?f0b59) !important;
+        background-image: url(https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/arrow-down-progressive.svg?f0b59) !important;
         opacity: 1;
     }
 
@@ -3601,7 +3605,7 @@
     }
 
     #page .vector-page-titlebar .mw-portlet-lang .vector-dropdown-checkbox:active+.vector-dropdown-label.cdx-button--action-progressive.cdx-button--weight-quiet::after {
-        background-image: url(/w/skins/Vector/resources/skins.vector.styles/images/arrow-down-invert.svg?e24ea) !important;
+        background-image: url(https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/arrow-down-invert.svg?e24ea) !important;
     }
 
     #page .vector-page-titlebar .mw-portlet-lang .vector-dropdown-content {
@@ -3627,7 +3631,7 @@
 
     #page .vector-page-titlebar .mw-portlet-lang .mw-portlet-lang-heading-empty::after {
         content: "";
-        background: url(/w/skins/Vector/resources/skins.vector.styles/images/arrow-down.svg?9426f) 100% 50% no-repeat;
+        background: url(https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/arrow-down.svg?9426f) 100% 50% no-repeat;
         width: 1.23076923em;
         height: 1.23076923em;
         margin-left: -1px;
@@ -3654,7 +3658,7 @@
 
     #page .mw-interlanguage-selector::after {
         content: "";
-        background: url(/w/skins/Vector/resources/skins.vector.styles/images/arrow-down.svg?9426f) 100% 50% no-repeat;
+        background: url(https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/arrow-down.svg?9426f) 100% 50% no-repeat;
         width: 1.23076923em;
         height: 1.23076923em;
         margin-left: -1px;
@@ -3713,7 +3717,7 @@
 
     #page .vector-user-menu-logged-in .vector-dropdown-label::after {
         content: "";
-        background: url(/w/skins/Vector/resources/skins.vector.styles/images/arrow-down.svg?9426f) 100% 50% no-repeat;
+        background: url(https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/arrow-down.svg?9426f) 100% 50% no-repeat;
         width: 1.23076923em;
         height: 1.23076923em;
         margin-left: -1px;
@@ -4504,7 +4508,7 @@
         overflow: hidden;
         width: 15px;
         height: 11px;
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e);
+        background-image: url(https://en.wikipedia.org/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e);
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -4526,7 +4530,7 @@
     }
 
     #page .mw-content-ltr .magnify a {
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e);
+        background-image: url(https://en.wikipedia.org/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e);
     }
 
     #page .mw-content-rtl .magnify {
@@ -4536,7 +4540,7 @@
     }
 
     #page .mw-content-rtl .magnify a {
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-rtl.svg?38fd5);
+        background-image: url(https://en.wikipedia.org/w/resources/src/mediawiki.skinning/images/magnify-clip-rtl.svg?38fd5);
     }
 
     #page figure[typeof~="mw:File/Thumb"],
@@ -4596,21 +4600,21 @@
         position: absolute;
         bottom: -11px;
         right: 6px;
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e);
+        background-image: url(https://en.wikipedia.org/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e);
     }
 
     #page .mw-content-ltr figure[typeof~="mw:File/Thumb"]>.mw-file-description::after,
     #page .mw-content-ltr figure[typeof~="mw:File/Thumb"]>.mw-file-magnify::after {
         right: 6px;
         left: auto;
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e);
+        background-image: url(https://en.wikipedia.org/w/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg?8330e);
     }
 
     #page .mw-content-rtl figure[typeof~="mw:File/Thumb"]>.mw-file-description::after,
     #page .mw-content-rtl figure[typeof~="mw:File/Thumb"]>.mw-file-magnify::after {
         right: auto;
         left: 6px;
-        background-image: url(/w/resources/src/mediawiki.skinning/images/magnify-clip-rtl.svg?38fd5);
+        background-image: url(https://en.wikipedia.org/w/resources/src/mediawiki.skinning/images/magnify-clip-rtl.svg?38fd5);
     }
 
     #page a.new {
