@@ -16,10 +16,13 @@
             let options;
             let paths;
             let popup;
+            let getRidOfPopup = false;
 
             loadingIcon.hidden = true;
 
             document.body.onclick = (event) => {
+                event.preventDefault();
+
                 // Anchor tag : a link was clicked on the page
                 if (event.target.tagName === 'A') {
                     event.preventDefault();
@@ -96,19 +99,20 @@
                             searchTerm = searchTerm.split("?")[0];
                         }
 
-
+                        let title = searchTerm.pop();
 
                         // additional annoying things I've found
                         // This looks like a lot of checks but for wiki pages there isn't a lot to iterate over
-                        if (this.href.includes('/wiki/') && searchTerm[searchTerm.length - 2] == 'wiki' && !searchTerm.includes(":") && !this.href.includes('/wiki/Wikipedia') && !this.href.includes('/wiki/MediaWiki') && !this.href.includes('/wiki/TimedText') && !this.href.includes('wikidata.org')) {
+                        if (this.href.includes('/wiki/') && searchTerm[searchTerm.length - 1] == 'wiki' && !title.includes(":") && !this.href.includes('/wiki/Wikipedia') && !this.href.includes('/wiki/MediaWiki') && !this.href.includes('/wiki/TimedText') && !this.href.includes('wikidata.org')) {
                             // Fetch the summary from the Wikipedia API
-                            fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${searchTerm.pop()}`)
+                            fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${title}`)
                                 .then(response => response.json())
                                 .then(data => {
                                     // There should only be one on screen at a time
                                     if (document.body.contains(popup)) {
                                         document.body.removeChild(popup);
                                     }
+                                    getRidOfPopup = false;
 
                                     popup = document.createElement('div');
                                     popup.innerHTML = data.extract;
@@ -116,12 +120,12 @@
                                     // Position the popup at the mouse's location, apply style guidelines
                                     popup.style.position = 'absolute';
                                     popup.style.left = (event.pageX + 15) + 'px';
-                                    popup.style.top = (event.pageY - 5) + 'px';
+                                    popup.style.top = (event.pageY + 15) + 'px';
                                     popup.style.padding = "8px";
                                     popup.style.display = "block";
                                     popup.classList.add("mwe-popups");
                                     popup.classList.add("mwe-popups-type-page");
-                                    popup.classList.add("mwe-popups-fade-in-down");
+                                    popup.classList.add("mwe-popups-fade-in-up");
                                     popup.classList.add("flipped-x-y");
                                     popup.classList.add("mwe-popups-no-image-pointer");
                                     popup.classList.add("mwe-popups-is-not-tall");
@@ -143,7 +147,16 @@
             // Remove any popup when mouse leaves any link
             document.addEventListener('mouseout', function (event) {
                 if (document.body.contains(popup)) {
-                    document.body.removeChild(popup);
+                    //document.body.removeChild(popup);
+                    popup.classList.replace("mwe-popups-fade-in-up", "mwe-popups-fade-out-down");
+                    getRidOfPopup = true;
+
+                    setTimeout(function () {
+                        if (getRidOfPopup && document.body.contains(popup)) {
+                            document.body.removeChild(popup);
+                            getRidOfPopup = false;
+                        }
+                    }, 200)
                 }
             });
 
@@ -170,10 +183,8 @@
                 let returned = sendData('/randomPage', options);
 
                 returned.then((response) => {
-                    console.log(response);
                     return response.json();
                 }).then((data) => {
-                    console.log(data);
 
                     options = {
                         method: "GET",
@@ -187,7 +198,6 @@
                     revisionFetch.then((response) => {
                         return response.json();
                     }).then((updatedData) => {
-                        console.log(updatedData);
 
                         // If a title is italicized then it doensn't display correctly
                         if (!updatedData.titlehtml.includes("<span")) {
@@ -205,7 +215,13 @@
                     // Fields that don't need an additional fetch request to load
                     paths = data.state.paths;
                     goalField.innerHTML = `Goal: ${paths[0][paths[0].length - 1].title}`;
-                    pathField.innerHTML = pathBuilder(paths[0]);
+
+                    if (paths.length > 0) {
+                        pathField.innerHTML = pathBuilder(paths[0]);
+                    }
+                    else {
+                        pathField.innerHTML = "Could not find a path within six degrees of separation.\nGood job if you found this one quickly.";
+                    }
                 });
             }
         }

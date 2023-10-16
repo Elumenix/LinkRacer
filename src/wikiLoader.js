@@ -52,7 +52,6 @@ const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reje
     resolve();
   }).catch((error) => {
     state.error = error;
-    console.log(state.error);
 
     // reject the promise
     reject(state.error);
@@ -79,7 +78,6 @@ const getRevisedUrl = async (request, response, query) => {
   const searchString = new URLSearchParams(params).toString();
 
   let extensionUrl;
-  console.log(searchString);
 
   // Fetch the data from the API
   await fetch(`https://en.wikipedia.org/w/api.php?${searchString}&redirects`)
@@ -95,7 +93,6 @@ const getRevisedUrl = async (request, response, query) => {
     })
     .catch((error) => console.error(`Error: ${error}`));
 
-  console.log(extensionUrl);
   fetch(`https://en.wikipedia.org/w/api.php?action=parse&format=json&${extensionUrl}&prop=text|displaytitle&redirects`).then((wikiResponse) => wikiResponse.json()).then((wikiHtml) => {
     const returnData = JSON.stringify({
       title: wikiHtml.parse.title,
