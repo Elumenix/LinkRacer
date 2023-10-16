@@ -79,9 +79,10 @@ const getRevisedUrl = async (request, response, query) => {
   const searchString = new URLSearchParams(params).toString();
 
   let extensionUrl;
+  console.log(searchString);
 
   // Fetch the data from the API
-  await fetch(`https://en.wikipedia.org/w/api.php?${searchString}`)
+  await fetch(`https://en.wikipedia.org/w/api.php?${searchString}&redirects`)
     .then((confirmation) => confirmation.json())
     .then((data) => {
       // Extract the page ID (it's a key in the 'pages' object)
@@ -94,11 +95,11 @@ const getRevisedUrl = async (request, response, query) => {
     })
     .catch((error) => console.error(`Error: ${error}`));
 
-  fetch(`https://en.wikipedia.org/w/api.php?action=parse&format=json&${extensionUrl}&prop=text|headhtml|displaytitle`).then((wikiResponse) => wikiResponse.json()).then((wikiHtml) => {
+  console.log(extensionUrl);
+  fetch(`https://en.wikipedia.org/w/api.php?action=parse&format=json&${extensionUrl}&prop=text|displaytitle&redirects`).then((wikiResponse) => wikiResponse.json()).then((wikiHtml) => {
     const returnData = JSON.stringify({
       title: wikiHtml.parse.title,
       titlehtml: wikiHtml.parse.displaytitle,
-      headhtml: wikiHtml.parse.headhtml,
       html: wikiHtml.parse.text,
     });
 

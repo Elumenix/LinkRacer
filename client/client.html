@@ -48,7 +48,7 @@
 
                         let title = splitSearch.pop();
 
-                        if (!title.includes(":")) {
+                        if (!title.includes(":") && splitSearch.pop() == 'wiki') {
                             // All pages should use the latest revision prior to January 1, 2021
                             let revisionFetch = sendData(`/getRevised?title=${title}`, options);
 
@@ -83,7 +83,7 @@
                         event.preventDefault();
 
                         // Get the search term from the link's href
-                        var searchTerm = this.href.split('/').pop();
+                        var searchTerm = this.href.split('/');
 
                         // Go to the article itself rather than a specific part of it
                         // otherwise I can't fetch it and this will send an error
@@ -96,11 +96,13 @@
                             searchTerm = searchTerm.split("?")[0];
                         }
 
+
+
                         // additional annoying things I've found
                         // This looks like a lot of checks but for wiki pages there isn't a lot to iterate over
-                        if (this.href.includes('/wiki/') && !this.href.includes('/wiki/Help:') && !this.href.includes('/wiki/Category:') && !this.href.includes('/wiki/File') && !this.href.includes('/wiki/Wikipedia') && !this.href.includes('/wiki/MediaWiki') && !this.href.includes('/wiki/Template') && !this.href.includes('/wiki/User') && !this.href.includes('/wiki/Portal') && !this.href.includes('/wiki/Draft') && !this.href.includes('/wiki/TimedText') && !this.href.includes('/wiki/Module') && !this.href.includes('wikidata.org')) {
+                        if (this.href.includes('/wiki/') && searchTerm[searchTerm.length - 2] == 'wiki' && !searchTerm.includes(":") && !this.href.includes('/wiki/Wikipedia') && !this.href.includes('/wiki/MediaWiki') && !this.href.includes('/wiki/TimedText') && !this.href.includes('wikidata.org')) {
                             // Fetch the summary from the Wikipedia API
-                            fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${searchTerm}`)
+                            fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${searchTerm.pop()}`)
                                 .then(response => response.json())
                                 .then(data => {
                                     // There should only be one on screen at a time
