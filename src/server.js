@@ -21,6 +21,15 @@ const onRequest = (request, response) => {
   if (pathname === '/getRevised') {
     wikiHandler.getRevisedUrl(request, response, query);
   }
+  if (pathname === '/node_modules/bootstrap/dist/css/bootstrap.min.css') {
+    htmlHandler.getBootstrapCSS(request, response);
+  }
+  if (pathname === '/node_modules/bootstrap/dist/js/bootstrap.min.js') {
+    htmlHandler.getBootstrapJs(request, response);
+  }
+  if (pathname === '/node_modules/jquery/dist/jquery.min.js') {
+    htmlHandler.getJQuery(request, response);
+  }
 };
 
 http.createServer(onRequest).listen(port, () => {

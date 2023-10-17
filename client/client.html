@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
         window.onload = () => {
             const submit = document.querySelector("#start-button");
@@ -229,15 +232,15 @@
 </head>
 
 <body>
-    <input type="submit" value="Start" id="start-button" />
-    <div id="mainWindow">
-        <div class="loader"></div>
-        <div id="page" style="width: 80%;height: 90vh;"></div>
+    <div class="racer-content" id="page">
     </div>
-    </iframe>
-    <div id="result-window">
+    <div class="racer-footer" id="result-window">
         <div id="goal"></div>
         <div id="pathways"></div>
+    </div>
+    <div class="racer-sidebar">
+        <input type="submit" value="Start" id="start-button" />
+        <div class="loader"></div>
     </div>
 </body>
 
