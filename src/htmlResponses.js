@@ -31,7 +31,7 @@ const getBootstrapCSS = (request, response) => {
 };
 
 const getJQuery = (request, response) => {
-  response.writeHead(200, { 'Content-Type': 'text/css' });
+  response.writeHead(200, { 'Content-Type': 'text/javascript' });
   response.write(jQuery);
   response.end();
 }

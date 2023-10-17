@@ -143,6 +143,7 @@ const getRandomPage = async (request, response) => {
     // Only pass starting page so it is loaded into the iframe
     const returnData = JSON.stringify({
       data: savedData.data1,
+      endPage: savedData.data2,
       state,
     });
 

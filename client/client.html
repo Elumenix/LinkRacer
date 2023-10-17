@@ -16,13 +16,17 @@
             const goalField = document.querySelector("#goal");
             const pathField = document.querySelector("#pathways");
             const loadingIcon = document.querySelector(".loader");
+            const progressField = document.querySelector("#current-path");
             let options;
             let paths;
             let popup;
+            let endPage;
             let getRidOfPopup = false;
 
+            const pathArray = [];
             loadingIcon.hidden = true;
 
+            // This method is what handles links being clicked and changing the page
             document.body.onclick = (event) => {
                 event.preventDefault();
 
@@ -43,7 +47,7 @@
 
                     // additional annoying things I've found
                     // This is a lot shorter than the links one due to the fact that I'm able to remove the colon
-                    if (searchTerm.includes('/wiki/') && !searchTerm.includes('/wiki/MediaWiki') && !searchTerm.includes('/wiki/TimedText') && !searchTerm.includes('wikidata.org')) {
+                    if (searchTerm.includes('/wiki/') && !searchTerm.includes('/wiki/MediaWiki') && !searchTerm.includes('/wiki/TimedText') && !searchTerm.includes('wikidata.org') && !searchTerm.includes('wiktionary.org')) {
                         // Get rid of the wiki directory to leave only the title
                         let splitSearch = searchTerm.split('/');
 
@@ -61,8 +65,6 @@
                             revisionFetch.then((response) => {
                                 return response.json();
                             }).then((updatedData) => {
-                                console.log(updatedData);
-
                                 // If a title is italicized then it doensn't display correctly
                                 if (!updatedData.titlehtml.includes("<span")) {
                                     updatedData.titlehtml = `<span class="mw-page-title-main">${updatedData.title}</span>`;
@@ -71,6 +73,20 @@
                                 page.innerHTML = `${updatedData.titlehtml}<hr><hr>${updatedData.html["*"]}`;
 
                                 assignLinkFunctions();
+
+
+                                // make sure this is formated the same as endpage
+                                title = title.replaceAll('_', ' ');
+                                title = decodeURIComponent(title);
+
+
+                                // Add new title to the path array
+                                pathArray.push(title);
+
+                                // The user has won the game
+                                if (title === endPage) {
+                                    loadingIcon.hidden = false;
+                                }
                             });
                         }
                     }
@@ -78,6 +94,7 @@
             }
 
 
+            // Makes it so that popups can appear on all links
             const assignLinkFunctions = () => {
                 // Get all the links the document
                 var links = document.getElementsByTagName('a');
@@ -106,7 +123,7 @@
 
                         // additional annoying things I've found
                         // This looks like a lot of checks but for wiki pages there isn't a lot to iterate over
-                        if (this.href.includes('/wiki/') && searchTerm[searchTerm.length - 1] == 'wiki' && !title.includes(":") && !this.href.includes('/wiki/Wikipedia') && !this.href.includes('/wiki/MediaWiki') && !this.href.includes('/wiki/TimedText') && !this.href.includes('wikidata.org')) {
+                        if (this.href.includes('/wiki/') && searchTerm[searchTerm.length - 1] == 'wiki' && !title.includes(":") && !this.href.includes('/wiki/Wikipedia') && !this.href.includes('/wiki/MediaWiki') && !this.href.includes('/wiki/TimedText') && !this.href.includes('wikidata.org') && !searchTerm.includes('wiktionary.org')) {
                             // Fetch the summary from the Wikipedia API
                             fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${title}`)
                                 .then(response => response.json())
@@ -123,7 +140,7 @@
                                     // Position the popup at the mouse's location, apply style guidelines
                                     popup.style.position = 'absolute';
                                     popup.style.left = (event.pageX + 15) + 'px';
-                                    popup.style.top = (event.pageY + 15) + 'px';
+                                    popup.style.top = (event.pageY + 35) + 'px';
                                     popup.style.padding = "8px";
                                     popup.style.display = "block";
                                     popup.classList.add("mwe-popups");
@@ -175,6 +192,8 @@
                 return workingString;
             }
 
+
+            // Starts the program
             submit.onclick = () => {
                 loadingIcon.hidden = false;
 
@@ -217,6 +236,11 @@
 
                     // Fields that don't need an additional fetch request to load
                     paths = data.state.paths;
+                    endPage = data.endPage.title;
+
+                    pathArray.length = 0;
+                    pathArray.push(data.data.title);
+
                     goalField.innerHTML = `Goal: ${paths[0][paths[0].length - 1].title}`;
 
                     if (paths.length > 0) {
@@ -227,6 +251,31 @@
                     }
                 });
             }
+
+
+            // This code was taken from Here: https://stackoverflow.com/questions/5306843/attach-event-listener-to-array-for-push-event
+            // It's function is to create an event that fires every time every time an item is pushed to the pathArray 
+            var eventify = function (arr, callback) {
+                arr.push = function (e) {
+                    Array.prototype.push.call(arr, e);
+                    callback(arr);
+                };
+            };
+
+            // This is the function that will fire on each push
+            // It can be assumed that it will always have at least one item
+            eventify(pathArray, function () {
+                // In this context, updatedArr is the length of pathArray
+                let string = pathArray[0];
+
+                if (pathArray.length > 1) {
+                    for (let i = 1; i < pathArray.length; i++) {
+                        string = `${string} --> ${pathArray[i]}`;
+                    }
+                }
+
+                progressField.innerHTML = string;
+            });
         }
     </script>
 </head>
@@ -236,6 +285,7 @@
     </div>
     <div class="racer-footer" id="result-window">
         <div id="goal"></div>
+        <div id="current-path"></div>
         <div id="pathways"></div>
     </div>
     <div class="racer-sidebar">
