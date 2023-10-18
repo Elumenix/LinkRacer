@@ -26,6 +26,32 @@
             const pathArray = [];
             loadingIcon.hidden = true;
 
+
+
+            const reachedFinish = () => {
+                let postJson = {
+                    'startPos': pathArray[0],
+                    'endPos': pathArray[pathArray.length - 1],
+                    'pathUsed': pathArray
+                };
+
+                options = {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': 'application/json'
+                    },
+                    body: JSON.stringify(postJson)
+                };
+
+                let returned = sendData('/updateRecents', options);
+
+                returned.then((response) => {
+                    console.log("This has finished");
+                })
+            }
+
+
             // This method is what handles links being clicked and changing the page
             document.body.onclick = (event) => {
                 event.preventDefault();
@@ -85,7 +111,7 @@
 
                                 // The user has won the game
                                 if (title === endPage) {
-                                    loadingIcon.hidden = false;
+                                    reachedFinish();
                                 }
                             });
                         }

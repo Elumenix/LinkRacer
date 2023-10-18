@@ -1,11 +1,26 @@
 const queryString = require('querystring');
 
+const previousSearches = [];
+
 const state = {
   sourcePageTitle: '',
   targetPageTitle: '',
   paths: [],
   error: null,
 };
+
+
+const updateRecents = (request, response, bodyParams) => {
+  console.log(bodyParams);
+
+  const responseJSON = {
+    message: 'Name and age are both required.',
+  };
+
+  response.writeHead(200, { 'Content-Type': 'application/json' });
+    response.write(JSON.stringify(responseJSON));
+    response.end();
+}
 
 const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reject) => {
   // Test route
@@ -157,3 +172,4 @@ const getRandomPage = async (request, response) => {
 
 module.exports.getRandomPage = getRandomPage;
 module.exports.getRevisedUrl = getRevisedUrl;
+module.exports.updateRecents = updateRecents;

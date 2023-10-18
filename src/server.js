@@ -1,5 +1,7 @@
 const http = require('http');
 const url = require('url');
+const querystring = require('querystring');
+
 const htmlHandler = require('./htmlResponses');
 const wikiHandler = require('./wikiLoader');
 
@@ -29,6 +31,26 @@ const onRequest = (request, response) => {
   }
   if (pathname === '/node_modules/jquery/dist/jquery.min.js') {
     htmlHandler.getJQuery(request, response);
+  }
+  if (pathname === '/updateRecents') {
+    const body = [];
+
+    request.on('error', (err) => {
+      console.dir(err);
+      response.statusCode = 400;
+      response.end();
+    });
+
+    request.on('data', (chunk) => {
+      body.push(chunk);
+    });
+
+    request.on('end', () => {
+      const bodyString = Buffer.concat(body).toString();
+      const bodyParams = querystring.parse(bodyString);
+
+      wikiHandler.updateRecents(request, response, bodyParams);
+    });
   }
 };
 
