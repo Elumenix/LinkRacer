@@ -1,7 +1,5 @@
 const queryString = require('querystring');
 
-const previousSearches = [];
-
 const state = {
   sourcePageTitle: '',
   targetPageTitle: '',
@@ -10,16 +8,46 @@ const state = {
 };
 
 
-const updateRecents = (request, response, bodyParams) => {
-  console.log(bodyParams);
+const previousSearches = [];
 
+
+const getRecents = (request, response) => {
   const responseJSON = {
-    message: 'Name and age are both required.',
+    previousGames: previousSearches,
   };
 
   response.writeHead(200, { 'Content-Type': 'application/json' });
+  response.write(JSON.stringify(responseJSON));
+  response.end();
+}
+
+const updateRecents = (request, response, bodyParams) => {
+  let responseCode = 204;
+
+  if (previousSearches.length === 0) {
+    responseCode = 201
+  }
+
+
+  // Insterts game at the beginning of the array
+  previousSearches.unshift(bodyParams);
+
+  // Limit to 5 games
+  if (previousSearches.length > 5) {
+    previousSearches.pop();
+  }
+
+  response.writeHead(responseCode, { 'Content-Type': 'application/json' });
+
+  if (responseCode === 201) {
+    const responseJSON = {
+      message: "Created Successfully",
+    };
+
     response.write(JSON.stringify(responseJSON));
-    response.end();
+  }
+
+  response.end();
 }
 
 const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reject) => {
@@ -127,8 +155,8 @@ const getRandomPage = async (request, response) => {
 
   // Get two random wikipedia pages
   await Promise.all([
-    fetch('https://en.wikipedia.org/api/rest_v1/page/random/summary'),
-    fetch('https://en.wikipedia.org/api/rest_v1/page/random/summary'),
+    fetch('https://en.wikipedia.org/api/rest_v1/page/random/summary?redirects'),
+    fetch('https://en.wikipedia.org/api/rest_v1/page/random/summary?redirects'),
   ])
     .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
     .then(([data1, data2]) => {
@@ -173,3 +201,4 @@ const getRandomPage = async (request, response) => {
 module.exports.getRandomPage = getRandomPage;
 module.exports.getRevisedUrl = getRevisedUrl;
 module.exports.updateRecents = updateRecents;
+module.exports.getRecents = getRecents;

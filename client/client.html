@@ -17,6 +17,7 @@
             const pathField = document.querySelector("#pathways");
             const loadingIcon = document.querySelector(".loader");
             const progressField = document.querySelector("#current-path");
+            const gamePanel = document.querySelector("#games");
             let options;
             let paths;
             let popup;
@@ -27,6 +28,30 @@
             loadingIcon.hidden = true;
 
 
+            const displayPreviousGames = () => {
+
+                options = {
+                    method: "GET",
+                    headers: { 'accept': 'application/json' }
+                };
+
+                let returned = sendData('/getRecents', options);
+
+                returned.then((response) => {
+                    return response.json();
+                }).then((data) => {
+                    data.previousGames.forEach((game, index) => {
+                        // Create a new div for each game
+                        let gameDiv = document.createElement('div');
+
+                        // Add game information to the div
+                        gameDiv.innerHTML = `<h3>Game ${index + 1}</h3><p>Start Position: ${game.startPos}</p><p>End Position: ${game.endPos}</p>`;
+
+                        // Append the game div to the games div
+                        gamePanel.appendChild(gameDiv);
+                    });
+                })
+            }
 
             const reachedFinish = () => {
                 let postJson = {
@@ -44,11 +69,9 @@
                     body: JSON.stringify(postJson)
                 };
 
-                let returned = sendData('/updateRecents', options);
-
-                returned.then((response) => {
-                    console.log("This has finished");
-                })
+                sendData('/updateRecents', options).then((response) => response).then(() => {
+                    displayPreviousGames();
+                });
             }
 
 
@@ -57,7 +80,7 @@
                 event.preventDefault();
 
                 // Anchor tag : a link was clicked on the page
-                if (event.target.tagName === 'A') {
+                if (event.target.tagName === 'A' || event.currentTarget.tagName === 'A') {
                     event.preventDefault();
 
                     searchTerm = event.target.href;
@@ -85,6 +108,8 @@
                         let title = splitSearch.pop();
 
                         if (!title.includes(":") && splitSearch.pop() == 'wiki') {
+                            loadingIcon.hidden = false;
+
                             // All pages should use the latest revision prior to January 1, 2021
                             let revisionFetch = sendData(`/getRevised?title=${title}`, options);
 
@@ -96,7 +121,10 @@
                                     updatedData.titlehtml = `<span class="mw-page-title-main">${updatedData.title}</span>`;
                                 }
 
+
                                 page.innerHTML = `${updatedData.titlehtml}<hr><hr>${updatedData.html["*"]}`;
+                                loadingIcon.hidden = true;
+
 
                                 assignLinkFunctions();
 
@@ -316,6 +344,7 @@
     </div>
     <div class="racer-sidebar">
         <input type="submit" value="Start" id="start-button" />
+        <div id="games"></div>
         <div class="loader"></div>
     </div>
 </body>

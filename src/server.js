@@ -1,6 +1,5 @@
 const http = require('http');
 const url = require('url');
-const querystring = require('querystring');
 
 const htmlHandler = require('./htmlResponses');
 const wikiHandler = require('./wikiLoader');
@@ -11,6 +10,8 @@ const onRequest = (request, response) => {
   const { pathname, query } = url.parse(request.url);
   console.log(pathname);
 
+
+  // I really should have orgainzed this earlier on
   if (pathname === '/') {
     htmlHandler.getIndex(request, response);
   }
@@ -47,10 +48,13 @@ const onRequest = (request, response) => {
 
     request.on('end', () => {
       const bodyString = Buffer.concat(body).toString();
-      const bodyParams = querystring.parse(bodyString);
+      const bodyParams = JSON.parse(bodyString);
 
       wikiHandler.updateRecents(request, response, bodyParams);
     });
+  }
+  if (pathname === '/getRecents') {
+    wikiHandler.getRecents(request, response);
   }
 };
 
