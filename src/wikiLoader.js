@@ -16,7 +16,7 @@ const getRecents = (request, response) => {
     previousGames: previousSearches,
   };
 
-  response.writeHead(200, { 'Content-Type': 'application/json' });
+  response.writeHead(200, { 'Content-Type': request.headers.accept });
   response.write(JSON.stringify(responseJSON));
   response.end();
 }
@@ -37,7 +37,7 @@ const updateRecents = (request, response, bodyParams) => {
     previousSearches.pop();
   }
 
-  response.writeHead(responseCode, { 'Content-Type': 'application/json' });
+  response.writeHead(responseCode, { 'Content-Type': request.headers.accept });
 
   if (responseCode === 201) {
     const responseJSON = {

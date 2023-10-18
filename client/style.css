@@ -2,6 +2,10 @@
     border-collapse: separate;
 }
 
+#pathways {
+    color:#b32424;
+}
+
 .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
@@ -39,6 +43,7 @@ body, html {
     overflow: hidden;
 }
 .racer-content {
+    margin: 5px;
     position: absolute;
     top: 0;
     bottom: 20%; /* height of the footer */
@@ -47,12 +52,14 @@ body, html {
     overflow-y: auto;
 }
 .racer-footer {
+    margin-top: 5px;
     position: fixed;
     bottom: 0;
     height: 20%;
     width: 75%; /* width of the content area */
 }
 .racer-sidebar {
+    margin-left: 10px;
     position: fixed;
     top: 0;
     right: 0;

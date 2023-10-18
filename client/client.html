@@ -28,7 +28,16 @@
             loadingIcon.hidden = true;
 
 
+            const sendData = (url, options) => fetch(url, options);
+
+
             const displayPreviousGames = () => {
+                // Remove summary if it's there
+                let save = '';
+                if (gamePanel.innerHTML != '') {
+                    save = "<h1>You Win!</h1>";
+                    gamePanel.innerHTML = '';
+                }
 
                 options = {
                     method: "GET",
@@ -40,12 +49,20 @@
                 returned.then((response) => {
                     return response.json();
                 }).then((data) => {
+                    let maybePlural;
                     data.previousGames.forEach((game, index) => {
                         // Create a new div for each game
                         let gameDiv = document.createElement('div');
 
+                        if (index + 1 === 1) {
+                            maybePlural = 'Game';
+                        }
+                        else {
+                            maybePlural = 'Games';
+                        }
+
                         // Add game information to the div
-                        gameDiv.innerHTML = `<h3>Game ${index + 1}</h3><p>Start Position: ${game.startPos}</p><p>End Position: ${game.endPos}</p>`;
+                        gameDiv.innerHTML = `<h3>${save}${index + 1} ${maybePlural} Ago</h3><p>Start Position: ${game.startPos}</p><p>End Position: ${game.endPos}</p><p>Links Clicked: ${game.pathUsed.length - 1}</p>`;
 
                         // Append the game div to the games div
                         gamePanel.appendChild(gameDiv);
@@ -53,7 +70,12 @@
                 })
             }
 
+            // Immidiately display previous games
+            displayPreviousGames();
+
             const reachedFinish = () => {
+                pathField.hidden = false;
+
                 let postJson = {
                     'startPos': pathArray[0],
                     'endPos': pathArray[pathArray.length - 1],
@@ -126,6 +148,7 @@
                                 loadingIcon.hidden = true;
 
 
+                                // Assign navigation links
                                 assignLinkFunctions();
 
 
@@ -216,8 +239,6 @@
             }
 
 
-            const sendData = (url, options) => fetch(url, options);
-
             // Remove any popup when mouse leaves any link
             document.addEventListener('mouseout', function (event) {
                 if (document.body.contains(popup)) {
@@ -250,6 +271,7 @@
             // Starts the program
             submit.onclick = () => {
                 loadingIcon.hidden = false;
+                pathField.hidden = true;
 
                 options = {
                     method: "GET",
@@ -295,7 +317,19 @@
                     pathArray.length = 0;
                     pathArray.push(data.data.title);
 
-                    goalField.innerHTML = `Goal: ${paths[0][paths[0].length - 1].title}`;
+                    goalField.innerHTML = `Goal: ${endPage}`;
+
+                    gamePanel.innerHTML = "";
+
+                    options = options = {
+                        method: "GET",
+                        headers: { 'accept': 'application/json' }
+                    };
+
+                    fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${endPage}`, options).then((response) => response.json()).then((data) => {
+                        gamePanel.innerHTML = `<h2>Goal: ${endPage}</h2>${data.extract}`
+                    })
+
 
                     if (paths.length > 0) {
                         pathField.innerHTML = pathBuilder(paths[0]);
