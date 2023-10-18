@@ -34,7 +34,7 @@ const getJQuery = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/javascript' });
   response.write(jQuery);
   response.end();
-}
+};
 
 module.exports.getIndex = getIndex;
 module.exports.getCSS = getCSS;

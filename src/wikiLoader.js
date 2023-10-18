@@ -7,9 +7,7 @@ const state = {
   error: null,
 };
 
-
 const previousSearches = [];
-
 
 const getRecents = (request, response) => {
   const responseJSON = {
@@ -19,15 +17,14 @@ const getRecents = (request, response) => {
   response.writeHead(200, { 'Content-Type': request.headers.accept });
   response.write(JSON.stringify(responseJSON));
   response.end();
-}
+};
 
 const updateRecents = (request, response, bodyParams) => {
   let responseCode = 204;
 
   if (previousSearches.length === 0) {
-    responseCode = 201
+    responseCode = 201;
   }
-
 
   // Insterts game at the beginning of the array
   previousSearches.unshift(bodyParams);
@@ -41,14 +38,14 @@ const updateRecents = (request, response, bodyParams) => {
 
   if (responseCode === 201) {
     const responseJSON = {
-      message: "Created Successfully",
+      message: 'Created Successfully',
     };
 
     response.write(JSON.stringify(responseJSON));
   }
 
   response.end();
-}
+};
 
 const getShortestPath = (startingPage, endingPage) => new Promise((resolve, reject) => {
   // Test route

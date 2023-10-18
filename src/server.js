@@ -11,23 +11,27 @@ const onRequest = (request, response) => {
   const { pathname, query } = parsedUrl;
   console.log(request.method);
 
+  // quick error workaround:
+  const json = {
+    message: 'The endpoint could not be found',
+  };
+  const body = [];
+
   if (!request.headers.accept.includes('application/json')) {
     request.headers.accept = 'application/json';
   }
   console.log(pathname);
 
-  if (request.method == "HEAD") {
+  if (request.method === 'HEAD') {
     response.writeHead(200, { 'Content-Type': request.headers.accept });
 
-      let returnjson = {
-        message: "You are successfully connecting to the server",
-      }
+    const returnjson = {
+      message: 'You are successfully connecting to the server',
+    };
 
-      response.write(JSON.stringify(returnjson));
-      response.end();
-  }
-  else {
-
+    response.write(JSON.stringify(returnjson));
+    response.end();
+  } else {
     switch (pathname) {
       case '/':
         htmlHandler.getIndex(request, response);
@@ -51,15 +55,14 @@ const onRequest = (request, response) => {
         htmlHandler.getJQuery(request, response);
         break;
       case '/updateRecents':
-        const body = [];
 
         request.on('error', (err) => {
           console.dir(err);
           response.writeHead(400, { 'Content-Type': request.headers.accept });
 
-          let returnjson = {
+          const returnjson = {
             message: err,
-          }
+          };
           response.write(JSON.stringify(returnjson));
           response.end();
         });
@@ -74,13 +77,13 @@ const onRequest = (request, response) => {
 
           try {
             bodyParams = JSON.parse(bodyString);
-          }
-          catch {
+          } catch (e) {
+            console.log(e);
             response.writeHead(400, { 'Content-Type': request.headers.accept });
 
-            let returnjson = {
-              message: "Bad Request: Input JSON absent or not properly formatted.",
-            }
+            const returnjson = {
+              message: 'Bad Request: Input JSON absent or not properly formatted.',
+            };
             response.write(JSON.stringify(returnjson));
             response.end();
             return;
@@ -96,10 +99,7 @@ const onRequest = (request, response) => {
         // notFound
         response.writeHead(404, { 'Content-Type': request.headers.accept });
 
-        let returnjson = {
-          message: "The endpoint could not be found",
-        }
-        response.write(JSON.stringify(returnjson));
+        response.write(JSON.stringify(json));
         response.end();
     }
   }
